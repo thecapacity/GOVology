@@ -23,8 +23,6 @@ def diff_csvs(file1, file2):
     df_old = pd.read_csv(file1, dtype=str, index_col="name")
     df_new = pd.read_csv(file2, dtype=str, index_col="name")
 
-    deleted = df_old.index.difference(df_new.index)
-    added   = df_new.index.difference(df_old.index)
 
     for name in df_old.index.difference(df_new.index):
         print(f"❌ DELETED: {name}")
