@@ -16,7 +16,8 @@ jobs:
   download-tts:
     env:
       FILENAME: tts-weekly-snapshot-all.csv
-      URL: https://api.gsa.gov/technology/site-scanning/data/weekly-snapshot-all.csv # NOTE: let's grab all sites for now
+      OLDURL: https://api.gsa.gov/technology/site-scanning/data/weekly-snapshot-all.csv # NOTE: let's grab all sites for now
+      URL: https://api.gsa.gov/technology/site-scanning/data/site-scanning-live-filtered-latest.csv
     runs-on: ubuntu-latest
     outputs:
         CHANGES_DETECTED: ${{ steps.commit-and-push.outputs.CHANGES_DETECTED }}
