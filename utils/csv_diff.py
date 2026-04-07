@@ -20,9 +20,8 @@ def check_columns(file1, file2):
 
 
 def diff_csvs(file1, file2):
-    df_old = pd.read_csv(file1, dtype=str, index_col="name")
-    df_new = pd.read_csv(file2, dtype=str, index_col="name")
-
+    df_old = pd.read_csv(filepath, dtype=str, index_col="initial_domain", keep_default_na=False)
+    df_new = pd.read_csv(filepath, dtype=str, index_col="initial_domain", keep_default_na=False)
 
     for name in df_old.index.difference(df_new.index):
         print(f"❌ DELETED: {name}")
