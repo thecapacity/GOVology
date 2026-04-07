@@ -31,9 +31,8 @@ def diff_csvs(file1, file2):
 
     for name in df_old.index.intersection(df_new.index):
         old_row, new_row = df_old.loc[name], df_new.loc[name]
-        changes = old_row[old_row != new_row]
-        for field in changes.index:
-            print(f"\t⚠️  CHANGED [{name}] {field}: {old_row[field]!r} → {new_row[field]!r}")
+        for field in old_row.index[old_row != new_row]:
+            print(f"~ CHANGED [{name}] {field}: {old_row[field]!r} → {new_row[field]!r}")
 
 
 if __name__ == "__main__":
