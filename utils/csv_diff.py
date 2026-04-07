@@ -26,7 +26,7 @@ def diff_csvs(file1, file2):
     deleted = df_old.index.difference(df_new.index)
     added   = df_new.index.difference(df_old.index)
 
-    for name in deleted:
+    for name in df_old.index.difference(df_new.index):
         print(f"❌ DELETED: {name}")
     for name in added:
         print(f"✅ ADDED:   {name}")
