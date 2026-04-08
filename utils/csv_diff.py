@@ -32,9 +32,14 @@ def diff_csvs(file1, file2, details=False):
     df_old = df_old[common_cols]
     df_new = df_new[common_cols]
 
+    count_del = len(df_old.index.difference(df_new.index))
+    count_add = len(df_new.index.difference(df_old.index))
+
+    print(f"❌ DELETED: {len(df_old.index.difference(df_new.index))}")
     for name in df_old.index.difference(df_new.index):
         print(f"❌ DELETED: {name}")
 
+    print(f"✅ ADDED:   {len(df_new.index.difference(df_old.index))}")
     for name in df_new.index.difference(df_old.index):
         print(f"✅ ADDED:   {name}")
 
@@ -44,6 +49,8 @@ def diff_csvs(file1, file2, details=False):
             for field in old_row.index[old_row != new_row]:
                 print(f"⚠️  CHANGED [{name}] {field}: {old_row[field]!r} → {new_row[field]!r}")
 
+    return count_del, count_add
+
 if __name__ == "__main__":
     if len(sys.argv) != 3:
         print("Usage: python csv_diff.py file1.csv file2.csv")
@@ -52,6 +59,9 @@ if __name__ == "__main__":
     file1, file2 = sys.argv[1], sys.argv[2]
     print(f"Checking files: {file1} and {file2}\n")
 
-        diff_csvs(file1, file2)
     check_columns(file1, file2)
 
+    adds, dels = diff_csvs(file1, file2, details=False)
+
+    print(f"❌ TOTAL DELETED: {adds}")
+    print(f"✅ TOTAL   ADDED: {dels}")
