@@ -23,7 +23,7 @@ def load(filepath):
     df = df[~df.index.duplicated(keep="first")]
     return df
 
-def diff_csvs(file1, file2):
+def diff_csvs(file1, file2, details=False):
     df_old = load(file1)
     df_new = load(file2)
 
@@ -38,9 +38,9 @@ def diff_csvs(file1, file2):
     for name in df_new.index.difference(df_old.index):
         print(f"✅ ADDED:   {name}")
 
-    for name in df_old.index.intersection(df_new.index):
-        old_row, new_row = df_old.loc[name], df_new.loc[name]
-        try:
+    if details:
+        for name in df_old.index.intersection(df_new.index):
+            old_row, new_row = df_old.loc[name], df_new.loc[name]
             for field in old_row.index[old_row != new_row]:
                 print(f"~ CHANGED [{name}] {field}: {old_row[field]!r} → {new_row[field]!r}")
         except Exception as e:
