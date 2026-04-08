@@ -17,7 +17,6 @@ def check_columns(file1, file2):
             print(f"  Only in {file2}: {cols2 - cols1}")
     else:
         print(f"✅ Columns match ({len(cols1)} columns)")
-    return True
 
 def load(filepath):
     df = pd.read_csv(filepath, dtype=str, index_col="initial_domain", keep_default_na=False)
