@@ -7,6 +7,7 @@ import pandas as pd
 def check_columns(file1, file2):
     df1 = pd.read_csv(file1, nrows=0)  # just headers
     df2 = pd.read_csv(file2, nrows=0)
+
     cols1, cols2 = set(df1.columns), set(df2.columns)
     if cols1 != cols2:
         print("⚠️  Column mismatch — will compare on common columns only")
