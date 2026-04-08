@@ -35,11 +35,11 @@ def diff_csvs(file1, file2, details=False):
     count_del = len(df_old.index.difference(df_new.index))
     count_add = len(df_new.index.difference(df_old.index))
 
-    print(f"❌ DELETED: {len(df_old.index.difference(df_new.index))}")
+    print(f"❌ DELETED: {count_del}")
     for name in df_old.index.difference(df_new.index):
         print(f"❌ DELETED: {name}")
 
-    print(f"✅ ADDED:   {len(df_new.index.difference(df_old.index))}")
+    print(f"✅ ADDED:   {count_add}")
     for name in df_new.index.difference(df_old.index):
         print(f"✅ ADDED:   {name}")
 
