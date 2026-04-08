@@ -30,7 +30,6 @@ def load(filepath):
     df = df[~df.index.duplicated(keep="first")]
     return df
 
-
 def diff_csvs(file1, file2):
     df_old = load(file1)
     df_new = load(file2)
