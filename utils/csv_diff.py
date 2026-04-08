@@ -27,6 +27,11 @@ def diff_csvs(file1, file2):
     df_old = load(file1)
     df_new = load(file2)
 
+    # Align to common columns if there's a mismatch
+    common_cols = df_old.columns.intersection(df_new.columns)
+    df_old = df_old[common_cols]
+    df_new = df_new[common_cols]
+
     for name in df_old.index.difference(df_new.index):
         print(f"❌ DELETED: {name}")
 
