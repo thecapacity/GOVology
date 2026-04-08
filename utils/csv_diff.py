@@ -18,10 +18,15 @@ def check_columns(file1, file2):
     print(f"✅ Columns match ({len(cols1)} columns)")
     return True
 
+def load(filepath):
+    df = pd.read_csv(filepath, dtype=str, index_col="initial_domain", keep_default_na=False)
+    df = df[~df.index.duplicated(keep="first")]
+    return df
+
 
 def diff_csvs(file1, file2):
-    df_old = pd.read_csv(filepath, dtype=str, index_col="initial_domain", keep_default_na=False)
-    df_new = pd.read_csv(filepath, dtype=str, index_col="initial_domain", keep_default_na=False)
+    df_old = load(file1)
+    df_new = load(file2)
 
     for name in df_old.index.difference(df_new.index):
         print(f"❌ DELETED: {name}")
