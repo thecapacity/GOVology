@@ -4,25 +4,18 @@ import sys
 import pandas as pd
 
 
-def check_columns(file1, file2, realign=False):
+def check_columns(file1, file2):
     df1 = pd.read_csv(file1, nrows=0)  # just headers
     df2 = pd.read_csv(file2, nrows=0)
     cols1, cols2 = set(df1.columns), set(df2.columns)
     if cols1 != cols2:
-        print("⚠️  Column mismatch!")
+        print("⚠️  Column mismatch — will compare on common columns only")
         if cols1 - cols2:
             print(f"  Only in {file1}: {cols1 - cols2}")
         if cols2 - cols1:
             print(f"  Only in {file2}: {cols2 - cols1}")
-
-        if realign: # Align columns for comparison
-            df2 = df2[df1.columns]
-            return True
-        else:
-            return False
-
-    print(f"✅ Columns match ({len(cols1)} columns)")
-
+    else:
+        print(f"✅ Columns match ({len(cols1)} columns)")
     return True
 
 def load(filepath):
@@ -61,5 +54,5 @@ if __name__ == "__main__":
     file1, file2 = sys.argv[1], sys.argv[2]
     print(f"Checking files: {file1} and {file2}\n")
 
-    if check_columns(file1, file2, realign=True):
+    if check_columns(file1, file2):
         diff_csvs(file1, file2)
