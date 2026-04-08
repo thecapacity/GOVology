@@ -4,7 +4,7 @@ import sys
 import pandas as pd
 
 
-def check_columns(file1, file2):
+def check_columns(file1, file2, realign=False):
     df1 = pd.read_csv(file1, nrows=0)  # just headers
     df2 = pd.read_csv(file2, nrows=0)
     cols1, cols2 = set(df1.columns), set(df2.columns)
@@ -14,8 +14,15 @@ def check_columns(file1, file2):
             print(f"  Only in {file1}: {cols1 - cols2}")
         if cols2 - cols1:
             print(f"  Only in {file2}: {cols2 - cols1}")
-        return False
+
+        if realign: # Align columns for comparison
+            df2 = df2[df1.columns]
+            return True
+        else:
+            return False
+
     print(f"✅ Columns match ({len(cols1)} columns)")
+
     return True
 
 def load(filepath):
