@@ -52,5 +52,6 @@ if __name__ == "__main__":
     file1, file2 = sys.argv[1], sys.argv[2]
     print(f"Checking files: {file1} and {file2}\n")
 
-    if check_columns(file1, file2):
         diff_csvs(file1, file2)
+    check_columns(file1, file2)
+
