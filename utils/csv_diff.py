@@ -64,5 +64,5 @@ if __name__ == "__main__":
     dels, adds = diff_csvs(file1, file2, details=False)
 
     print()
-    print(f"❌ TOTAL DELETED: {adds}")
-    print(f"✅ TOTAL   ADDED: {dels}")
+    print(f"❌ TOTAL DELETED: {dels}")
+    print(f"✅ TOTAL   ADDED: {adds}")
